@@ -701,7 +701,8 @@
 
     function showVerse(translation) {
       const list = verses[translation];
-      const idx = userDaySeed % list.length;
+      const sharedLength = Math.min(verses['gae'].length, verses['sae'].length);
+      const idx = userDaySeed % sharedLength;
       document.getElementById('verse-text').textContent = list[idx].text;
       document.getElementById('verse-ref').textContent = list[idx].ref;
       document.getElementById('translation-label').textContent = translation === 'gae' ? '개역개정' : '새번역';
