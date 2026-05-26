@@ -20,7 +20,7 @@
     }
     .cross { font-size: 22px; color: #b07d4a; letter-spacing: 6px; margin-bottom: 1.25rem; text-align: center; }
     .date-label { font-size: 12px; color: #b0977a; letter-spacing: 2px; margin-bottom: 1.5rem; text-align: center; }
-    .toggle-wrap { display: flex; gap: 8px; margin-bottom: 1.75rem; }
+    .toggle-wrap { display: flex; gap: 8px; margin-bottom: 1.75rem; justify-content: center; }
     .toggle-btn {
       padding: 6px 16px;
       border-radius: 20px;
@@ -1215,16 +1215,21 @@
     const y = today.getFullYear();
     document.getElementById('date-label').textContent = `${y}년 ${m}월 ${d}일 ${days[today.getDay()]}`;
 
-    function showVerse(translation) {
-      const list = verses[translation];
-      const sharedLength = Math.min(verses['gae'].length, verses['sae'].length, verses['niv'].length);
-      const idx = userDaySeed % sharedLength;
-      document.getElementById('verse-text').textContent = list[idx].text;
-      document.getElementById('verse-ref').textContent = list[idx].ref;
-      let label = '개역개정';
-      if (translation === 'sae') label = '새번역';
-      if (translation === 'niv') label = 'NIV';
-      document.getElementById('translation-label').textContent = label;
+   function showVerse(translation) {
+  const gaeList = verses['gae'];
+  const sharedLength = Math.min(verses['gae'].length, verses['sae'].length, verses['niv'].length);
+  const idx = userDaySeed % sharedLength;
+  const targetRef = gaeList[idx].ref;
+
+  const list = verses[translation];
+  const match = list.find(v => v.ref === targetRef) || list[idx];
+
+  document.getElementById('verse-text').textContent = match.text;
+  document.getElementById('verse-ref').textContent = match.ref;
+  let label = '개역개정';
+  if (translation === 'sae') label = '새번역';
+  if (translation === 'niv') label = 'NIV';
+  document.getElementById('translation-label').textContent = label;
     }
 
     window.setTranslation = function(t) {
