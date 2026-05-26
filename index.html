@@ -65,7 +65,7 @@
   <div class="toggle-wrap">
     <button class="toggle-btn active" id="btn-gae" onclick="setTranslation('gae')">개역개정</button>
     <button class="toggle-btn" id="btn-sae" onclick="setTranslation('sae')">새번역</button>
-    <button class="toggle-btn" id="btn-niv" onclick="setTranslation('niv')">NIV</button>button>
+    <button class="toggle-btn" id="btn-niv" onclick="setTranslation('niv')">NIV</button>
   </div>
   <div class="card">
     <p class="verse-text" id="verse-text"></p>
@@ -1217,7 +1217,7 @@
 
     function showVerse(translation) {
       const list = verses[translation];
-      const sharedLength = Math.min(verses['gae'].length, verses['sae'].length);
+      const sharedLength = Math.min(verses['gae'].length, verses['sae'].length, verses['niv'].length);
       const idx = userDaySeed % sharedLength;
       document.getElementById('verse-text').textContent = list[idx].text;
       document.getElementById('verse-ref').textContent = list[idx].ref;
